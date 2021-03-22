@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+import React, { useContext } from 'react';
 import './App.css';
+import MyProvider, { MyContext } from './MyContext';
+
+function BigSquare() {
+	const colors = ['blue', 'yellow'];
+	const { bigSquareColor, setBigSquareColor } = useContext(MyContext);
+
+	return (
+		<div
+			className='bigSquare'
+			style={{ backgroundColor: bigSquareColor }}
+			onClick={() =>
+				setBigSquareColor(colors[Math.floor(Math.random() * 2)])
+			}
+		></div>
+	);
+}
+
+function SmallSquare() {
+	const colors = ['blue', 'yellow'];
+	const { smallSquareColor, setSmallSquareColor } = useContext(MyContext);
+
+	return (
+		<div
+			className='smallSquare'
+			style={{ backgroundColor: smallSquareColor }}
+			onClick={() =>
+				setSmallSquareColor(colors[Math.floor(Math.random() * 2)])
+			}
+		></div>
+	);
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className='App'>
+			<MyProvider>
+				<BigSquare />
+				<SmallSquare />
+			</MyProvider>
+		</div>
+	);
 }
 
 export default App;
